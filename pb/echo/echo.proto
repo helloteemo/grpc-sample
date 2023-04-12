@@ -9,6 +9,7 @@ import "validate/validate.proto";
 message EchoRequest {
   // The message to echo.
   string message = 1[(validate.rules).string = {min_len: 1, max_len: 32}];
+  int64 user_id = 2;
 }
 
 message EchoResponse {
@@ -19,16 +20,16 @@ message EchoResponse {
 service EchoService {
 
   // Echoes the message.
-    rpc Echo(EchoRequest) returns (EchoResponse){
-      option (google.api.http) = {
-        post:"/grpc-sample/echo/v1/do"
-        body: "*"
-      };
-      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-        summary: "echo"
-        description: "",
-        tags: ["app"]
-      };
+  rpc Echo(EchoRequest) returns (EchoResponse){
+    option (google.api.http) = {
+      post:"/grpc-sample/echo/v1/do"
+      body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "echo"
+      description: "",
+      tags: ["app"]
+    };
+  };
 
 }

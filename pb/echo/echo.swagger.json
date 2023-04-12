@@ -51,6 +51,10 @@
         "message": {
           "type": "string",
           "description": "The message to echo."
+        },
+        "user_id": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
