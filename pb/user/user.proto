@@ -1,0 +1,32 @@
+syntax = "proto3";
+package grpc_sample.user;
+
+option go_package = "github.com/helloteemo/pb/user";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "validate/validate.proto";
+
+message UserRequest {
+  int64 UserId = 1;
+}
+
+message UserResponse {
+  string message = 1;
+}
+
+service UserService {
+
+  // Echoes the message.
+  rpc Echo(UserRequest) returns (UserResponse){
+    option (google.api.http) = {
+      post:"/grpc-sample/user/v1/do"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "echo"
+      description: "",
+      tags: ["app"]
+    };
+  };
+
+}
